@@ -1,5 +1,6 @@
 These files are for custom use 
-Settgins are 
+Default Settings 
+
 Mode: 2
 
 Filter_status: Enabled
