@@ -1,5 +1,5 @@
 
-V15 updates -- Increased FFT Bins to increase the FFT freq accruacy 
+V15 updates -- Enhanced the number of FFT Bins for improved frequency resolution in the FFT.
 
 These files are for custom use Default Settings
 
