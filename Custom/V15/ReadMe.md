@@ -17,7 +17,7 @@ ODR_2: 12800Hz
 
 LPF_Coeff_1: 4
 
-HPF_Coeff_1: 22048
+HPF_Coeff_1: 2048
 
 LPF_Coeff_2: 4
 
