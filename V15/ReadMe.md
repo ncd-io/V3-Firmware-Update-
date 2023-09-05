@@ -3,7 +3,7 @@ V15 updates -- Enhanced the number of FFT Bins for improved frequency resolution
 
 These files are for custom use Default Settings
 
-Mode: 2
+Mode: 1 (Processed Mode) 
 
 Filter_status: Enabled
 
