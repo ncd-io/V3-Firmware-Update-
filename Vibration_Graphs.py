@@ -1,42 +1,49 @@
+# Syntax 
+# $ python Vibration_Graphs <csv file path> <Sampling Frequency> <FFT Points>
+
+# Example
+# $ python Vibration_Graphs ./x.csv 12800 1024
+
 from scipy.fft import rfft
 from scipy.fftpack import rfftfreq
-from scipy.signal import hilbert
-from scipy.stats import kurtosis
 import array
 import pandas
 import numpy
 import matplotlib.pyplot
 import sys
 
-file_name = sys.argv[1]
-Fs = int(sys.argv[2])
-FFT_PT = int(sys.argv[3])
+file_name = sys.argv[1] #Argument 1 is the .csv (Column 0 includes acceleration in g)
+Fs = int(sys.argv[2]) #Argument 2 is the Sampling Frequency in Hz
+FFT_PT = int(sys.argv[3]) #Argument 3 is the number of FFT points (the file should have enough samples)
 file_csv = pandas.read_csv(file_name, nrows=FFT_PT)
 
-matrix2 = file_csv[file_csv.columns[0]].to_numpy()
-time_domain_data = matrix2.tolist()
+matrix = file_csv[file_csv.columns[0]].to_numpy()
+time_domain_data = matrix.tolist()
 
-print("Data Samples ", len(time_domain_data))
+#Convert to mg
+time_domain_data = [i * 1000 for i in time_domain_data] 
 
-time_domain_data = [i * 1000 for i in time_domain_data]
-
-fig, plts = matplotlib.pyplot.subplots(2)
+fig, (timeDomainPlt, FreqDomainPlt) = matplotlib.pyplot.subplots(2)
 
 fig.suptitle("Signal Analysis")
+
+#Run Real FFT
 freq_data = rfft(time_domain_data)
+
+#Extract Magnitude 
 freq_data = numpy.absolute(freq_data)
 
-freq_data = [i * 2 / len(time_domain_data) for i in freq_data]
+#Descale to get magnitude in mg
+freq_data = [i * 2.0 / FFT_PT for i in freq_data]
 freq_steps = rfftfreq(len(freq_data), d=1./Fs)
 
-plts[0].plot(time_domain_data)
-plts[0].set_ylabel("Acceleration (mg)")
-plts[0].set_xlabel("Time (n)")
+timeDomainPlt.plot(time_domain_data)
+timeDomainPlt.set_ylabel("Acceleration (mg)")
+timeDomainPlt.set_xlabel("Time (n)")
 
-kur = int(kurtosis(freq_data))
-plts[1].plot(freq_steps, freq_data)
-plts[1].set_ylabel("Acceleration (mg)")
-plts[1].set_xlabel("Frequency (Hz)")
+FreqDomainPlt.plot(freq_steps, freq_data)
+FreqDomainPlt.set_ylabel("Acceleration (mg)")
+FreqDomainPlt.set_xlabel("Frequency (Hz)")
 
 matplotlib.pyplot.show()
 
