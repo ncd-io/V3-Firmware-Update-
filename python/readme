@@ -1,0 +1,3 @@
+1. connect the programmer 
+2. find out the correct serail port
+3. command to start the update "python ncd_py_bootloader.py <com port> <ncd update file>"
