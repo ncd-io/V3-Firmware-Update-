@@ -1,3 +1,5 @@
 1. connect the programmer 
-2. find out the correct serail port
-3. command to start the update "python ncd_py_bootloader.py <com port> <ncd update file>"
+2. find out the correct serial port
+3. put the sensor in boot mode ( 1. press and hold cfg button 2. While holding cfg button, press and release the reset button 3. release cfg button)
+4. command to start the update "python ncd_py_bootloader.py <com port> <ncd update file>"
+example -- 
