@@ -1,1 +1,1 @@
-power can set over FLY
+power can be set over FLY
